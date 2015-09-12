@@ -4,7 +4,7 @@ var userService = require("../services/userService").getInstance(),
 var _instance;
 function UserController(){};
 
-UserController.prototype.addUser=function(req,res){
+UserController.prototype.createUser=function(req,res){
     if(userHelper.isValidUserObject(req)){
         req.body.active =true;
         userService.addUser(req.body)
