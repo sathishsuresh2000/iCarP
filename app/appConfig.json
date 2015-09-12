@@ -1,0 +1,7 @@
+{
+  "database":{
+    "environment":"127.0.0.1",
+    "dbName":"findMe",
+    "port":"27017"
+  }
+}

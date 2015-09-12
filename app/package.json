@@ -1,0 +1,29 @@
+{
+  "name": "findMe",
+  "version": "0.0.0-dev",
+  "gitCommmit": "UNKNOWN",
+  "gitBranch": "UNKNOWN",
+  "scripts": {
+    "start": "app.js",
+    "pretest": "node data-setup.js",
+    "test": "grunt"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "dependencies": {
+    "body-parser": "1.8.1",
+    "bson": "0.2.3",
+    "express": "4.11.1",
+    "lazy-install": "0.3.0",
+    "lodash": "2.4.1",
+    "mongodb": "1.4.22",
+    "q": "1.0.0",
+    "underscore": "1.5.1",
+    "geolib": "2.0.14"
+  },
+  "devDependencies": {
+    "grunt": "0.4.5",
+    "node-inspector": "0.9.2"
+  }
+}
