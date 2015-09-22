@@ -1,14 +1,15 @@
+"use strict";
 var dataAccess = require("../../dataAccess").getInstance(),
   messageConstants = require ("../../messageConstants");
 var _instance;
 
-var UserHelper = function () {
+var GroupHelper = function () {
 };
 
-UserHelper.prototype.checkIfUserExist = function (userObject) {
+GroupHelper.prototype.checkIfGroupExist = function (groupObject) {
   var query = {};
-  query.userId = userObject.userId;
-  return dataAccess.findDocument(messageConstants.collections.users, query)
+  query.groupName = groupObject.groupName;
+  return dataAccess.findDocument(messageConstants.collections.groups, query)
     .then(function (object) {
       return object && object.length > 0 ? true : false;
     });
@@ -16,7 +17,7 @@ UserHelper.prototype.checkIfUserExist = function (userObject) {
 module.exports = {
   getInstance: function () {
     if (!_instance) {
-      _instance = new UserHelper();
+      _instance = new GroupHelper();
     }
     return _instance;
   }

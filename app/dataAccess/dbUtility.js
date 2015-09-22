@@ -1,6 +1,6 @@
 var q=require("q"),
     MongoClient=require("mongodb").MongoClient;
-var config=require("../../appConfig");
+var config=require("./../appConfig");
 var _instance;
 var DBUtility =function() {
     var _getConnectionString=function(){

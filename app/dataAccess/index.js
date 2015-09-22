@@ -1,5 +1,5 @@
 var q = require("q");
-var dbUtility = require("../dbUtility").getInstance();
+var dbUtility = require("./dbUtility").getInstance();
 var _instance;
 
 var DataAccess = function () {
@@ -45,6 +45,7 @@ DataAccess.prototype.findOneDocument = function (collection, query) {
 };
 
 DataAccess.prototype.findDocument = function (collection, query) {
+  console.log ("query...",JSON.stringify(query));
   var defer = q.defer();
   return dbUtility.getDBInstance()
     .then(function (db) {

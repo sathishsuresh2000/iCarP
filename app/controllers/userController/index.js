@@ -1,47 +1,49 @@
-var userService = require("../services/userService").getInstance(),
-    userHelper=require("./userHelper").getInstance(),
-    responseHelper=require("../responseHelper");
+var userService = require("../../services/userService").getInstance(),
+  userHelper = require("./userHelper").getInstance(),
+  controllerHelper = require("../controllerHelper").getInstance(),
+  messageConstants = require("../../messageConstants");
 var _instance;
-function UserController(){};
+var UserController = function () {
 
-UserController.prototype.createUser=function(req,res){
-    if(userHelper.isValidUserObject(req)){
-        req.body.active =true;
-        userService.addUser(req.body)
-            .then(function(userObject){
-                responseHelper.sendResponse(res,responseHelper.successStatus,userObject);
-            })
-            .fail(function(err){
-                responseHelper.sendResponse(res,responseHelper.errorStatus,null,err);
-            })
-            .done();
-    }
-    else{
-        responseHelper.sendResponse(res,responseHelper.failureStatus);
-    }
 };
 
-UserController.prototype.updateUser=function(req,res){
-    if(userHelper.isValidUserObject(req)){
-        userService.updateUser(req.body)
-            .then(function(userObject){
-                responseHelper.sendResponse(res,responseHelper.successStatus,userObject);
-            })
-            .fail(function(err){
-                responseHelper.sendResponse(res,responseHelper.errorStatus,null,err);
-            })
-            .done();
-    }
-    else{
-        responseHelper.sendResponse(res,responseHelper.failureStatus);
-    }
+UserController.prototype.createUser = function (req, res) {
+
+  userHelper.isValidUserObject(req)
+    .then(function () {
+      console.log ("from user...");
+      req.body.active = true;
+      return userService.addUser(req.body);
+    })
+    .then(function (userObject) {
+      controllerHelper.sendResponse(res, messageConstants.httpCodes.successfulCreate, userObject);
+    })
+    .fail(function (err) {
+      controllerHelper.sendResponse(res, err.code, err.message);
+    })
+    .done();
+};
+
+UserController.prototype.updateUser = function (req, res) {
+  userHelper.isValidUserObject(req)
+    .then(function () {
+      return userService.updateUser(req.body);
+    })
+    .then(function (userObject) {
+      controllerHelper.sendResponse(res, messageConstants.httpCodes.success, userObject);
+    })
+    .fail(function (err) {
+      controllerHelper.sendResponse(res, err.code, err.message);
+    })
+    .done();
+
 };
 
 module.exports = {
-    getInstance: function () {
-        if (!_instance) {
-            _instance = new UserController();
-        }
-        return _instance;
+  getInstance: function () {
+    if (!_instance) {
+      _instance = new UserController();
     }
+    return _instance;
+  }
 };
